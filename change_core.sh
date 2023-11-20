@@ -10,7 +10,7 @@ fi
 cd /var/lib/marzban/xray-core
 
 # Скачиваем Xray-core
-xray_version="1.8.4"
+xray_version="1.8.6"
 xray_filename="Xray-linux-64.zip"
 xray_download_url="https://github.com/XTLS/Xray-core/releases/download/v${xray_version}/${xray_filename}"
 
