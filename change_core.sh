@@ -5,7 +5,8 @@ if ! dpkg -s wget unzip >/dev/null 2>&1; then
   echo "Установка необходимых пакетов..."
   apt install -y wget unzip
 fi
-
+# Создаем папку /var/lib/marzban/xray-core
+mkdir -p /var/lib/marzban/xray-core
 # Переходим в папку /var/lib/marzban/xray-core
 cd /var/lib/marzban/xray-core
 
