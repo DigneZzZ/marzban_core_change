@@ -30,10 +30,10 @@ xray_executable_path='XRAY_EXECUTABLE_PATH="/var/lib/marzban/xray-core/xray"'
 
 echo "Изменение ядра Marzban..."
 # Комментируем все вхождения переменной XRAY_EXECUTABLE_PATH
-sed -i 's/^XRAY_EXECUTABLE_PATH=.*$//' "${marzban_env_file}"
+perl -i -pe 's/^XRAY_EXECUTABLE_PATH=.*$//' "${marzban_env_file}"
 
 # Добавляем новое значение переменной XRAY_EXECUTABLE_PATH после последней закомментированной строки (если есть)
-sed -i "/^# XRAY_EXECUTABLE_PATH=/a ${xray_executable_path}" "${marzban_env_file}"
+perl -i -pe 's/^# XRAY_EXECUTABLE_PATH=/\0\n'${xray_executable_path}'/' "${marzban_env_file}"
 
 # Перезапускаем Marzban
 echo "Перезапуск Marzban..."
