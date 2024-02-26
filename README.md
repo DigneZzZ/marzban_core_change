@@ -2,7 +2,7 @@
 Смена ядра в Marzban
 
 ```BASH
-bash <(wget -qO- https://raw.githubusercontent.com/DigneZzZ/marzban_core_change/main/change_core.sh)
+bash <(wget -qO- https://raw.githubusercontent.com/DigneZzZ/marzban_core_change/main/change.sh)
 ```
 <p>
   Мой форум: https://openode.ru
