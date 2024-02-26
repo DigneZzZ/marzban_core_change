@@ -86,7 +86,7 @@ wget "${xray_download_url}"
 
 # Извлекаем файл из архива и удаляем архив
 echo "Извлечение Xray-core..."
-unzip "${xray_filename}"
+unzip -o "${xray_filename}"
 rm "${xray_filename}"
 
 }
