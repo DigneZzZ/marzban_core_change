@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Отправляем запрос к GitHub API для получения информации о последних трех релизах
-latest_releases=$(curl -s "https://api.github.com/repos/XTLS/Xray-core/releases?per_page=3")
+latest_releases=$(curl -s "https://api.github.com/repos/XTLS/Xray-core/releases?per_page=5")
 
 # Извлекаем версии из JSON-ответа
 versions=($(echo "$latest_releases" | grep -oP '"tag_name": "\K(.*?)(?=")'))
