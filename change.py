@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+
 import os
 import subprocess
 import requests
-import json
 import sys
 
 def select_xray_version():
