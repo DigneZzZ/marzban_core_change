@@ -19,7 +19,7 @@ latest_release=$(curl -s "https://api.github.com/repos/XTLS/Xray-core/releases/l
 xray_version=$(echo "$latest_release" | grep -oP '"tag_name": "\K(.*?)(?=")')
 
 xray_filename="Xray-linux-64.zip"
-xray_download_url="https://github.com/XTLS/Xray-core/releases/download/v${xray_version}/${xray_filename}"
+xray_download_url="https://github.com/XTLS/Xray-core/releases/download/${xray_version}/${xray_filename}"
 
 echo "Скачивание Xray-core..."
 wget "${xray_download_url}"
