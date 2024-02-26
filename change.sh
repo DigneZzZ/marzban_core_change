@@ -68,7 +68,7 @@ install_xray_core() {
     cd /var/lib/marzban/xray-core || exit
     # Скачиваем Xray-core выбранной версии
     local xray_filename="Xray-linux-64.zip"
-    local xray_download_url="https://github.com/XTLS/Xray-core/releases/download/v${selected_version}/${xray_filename}"
+    local xray_download_url="https://github.com/XTLS/Xray-core/releases/download/${selected_version}/${xray_filename}"
     echo "Скачивание Xray-core версии ${selected_version}..."
     wget "${xray_download_url}"
     # Извлекаем файл из архива и удаляем архив
