@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Отправляем запрос к GitHub API для получения информации о последних трех релизах
-latest_releases=$(curl -s "https://api.github.com/repos/XTLS/Xray-core/releases?per_page=5")
+# Отправляем запрос к GitHub API для получения информации о последних четырех релизах
+latest_releases=$(curl -s "https://api.github.com/repos/XTLS/Xray-core/releases?per_page=4")
 
 # Извлекаем версии из JSON-ответа
 versions=($(echo "$latest_releases" | grep -oP '"tag_name": "\K(.*?)(?=")'))
@@ -13,12 +13,20 @@ for ((i=0; i<${#versions[@]}; i++)); do
 done
 
 # Предлагаем пользователю выбрать версию
-read -p "Выберите версию для установки (1-${#versions[@]}): " choice
-choice=$((choice - 1))  # Преобразуем в индекс массива
+printf "Выберите версию для установки (1-${#versions[@]}), или нажмите Enter для выбора последней по умолчанию (${versions[-1]}): "
+read choice
+
+# Проверяем, был ли сделан выбор пользователем
+if [ -z "$choice" ]; then
+    choice="${#versions[@]}"  # Выбираем последнюю версию по умолчанию
+fi
+
+# Преобразуем выбор пользователя в индекс массива
+choice=$((choice - 1))
 
 # Проверяем, что выбор пользователя в пределах доступных версий
 if [ "$choice" -lt 0 ] || [ "$choice" -ge "${#versions[@]}" ]; then
-    echo "Неверный выбор. Выбрана последняя версия по умолчанию."
+    echo "Неверный выбор. Выбрана последняя версия по умолчанию (${versions[-1]})."
     choice=$((${#versions[@]} - 1))  # Выбираем последнюю версию по умолчанию
 fi
 
