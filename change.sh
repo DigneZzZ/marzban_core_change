@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -x
 # Функция для выбора версии Xray-core
 select_xray_version() {
     local latest_releases=$(curl -s "https://api.github.com/repos/XTLS/Xray-core/releases?per_page=4")
@@ -109,5 +109,7 @@ fi
 
 # Установка Xray-core выбранной версии
 install_xray_core "$selected_version"
+
+set +x
 
 echo "Установка завершена."
