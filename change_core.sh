@@ -5,13 +5,19 @@ if ! dpkg -s wget unzip >/dev/null 2>&1; then
   echo "Установка необходимых пакетов..."
   apt install -y wget unzip
 fi
+
 # Создаем папку /var/lib/marzban/xray-core
 mkdir -p /var/lib/marzban/xray-core
 # Переходим в папку /var/lib/marzban/xray-core
 cd /var/lib/marzban/xray-core
 
 # Скачиваем Xray-core
-xray_version="1.8.7"
+# Отправляем запрос к GitHub API для получения информации о последнем релизе
+latest_release=$(curl -s "https://api.github.com/repos/XTLS/Xray-core/releases/latest")
+
+# Извлекаем версию из JSON-ответа
+xray_version=$(echo "$latest_release" | grep -oP '"tag_name": "\K(.*?)(?=")')
+
 xray_filename="Xray-linux-64.zip"
 xray_download_url="https://github.com/XTLS/Xray-core/releases/download/v${xray_version}/${xray_filename}"
 
@@ -29,12 +35,11 @@ marzban_env_file="${marzban_folder}/.env"
 xray_executable_path='XRAY_EXECUTABLE_PATH="/var/lib/marzban/xray-core/xray"'
 
 echo "Изменение ядра Marzban..."
-# Комментируем все вхождения переменной XRAY_EXECUTABLE_PATH
-perl -i -pe 's/^XRAY_EXECUTABLE_PATH=.*$//' "${marzban_env_file}"
-
-# Добавляем новое значение переменной XRAY_EXECUTABLE_PATH после последней закомментированной строки (если есть)
-# perl -i -pe 's/^# XRAY_EXECUTABLE_PATH=/\0\n'${xray_executable_path}'/' "${marzban_env_file}"
-echo ${xray_executable_path} >> "${marzban_env_file}"
+# Проверяем, существует ли уже строка XRAY_EXECUTABLE_PATH в файле .env
+if ! grep -q "^${xray_executable_path}" "$marzban_env_file"; then
+  # Если строка отсутствует, добавляем ее
+  echo "${xray_executable_path}" >> "${marzban_env_file}"
+fi
 
 # Перезапускаем Marzban
 echo "Перезапуск Marzban..."
