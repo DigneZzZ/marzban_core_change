@@ -24,7 +24,7 @@ echo '
 ██████╔╝   ██║       ██████╔╝██║╚██████╔╝██║ ╚████║███████╗███████╗███████╗███████╗
 ╚═════╝    ╚═╝       ╚═════╝ ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚══════╝╚══════╝╚══════╝
 '
-echo -e "\e[1m\e[33 .. My Community: https://openode.xyz\n\e[0m"
+echo -e "\e[1m\e[33  !My Community: https://openode.xyz\n\e[0m"
 sleep 2s
 
 echo -e "\e[1m\e[33mДанный скрипт устанавливает ядро Xray в Marzban и Marzban Node\n\e[0m"
