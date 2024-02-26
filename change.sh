@@ -67,9 +67,9 @@ selected_version=${versions[choice]}
 echo "Выбрана версия $selected_version для установки."
 
 # Проверяем, установлены ли необходимые пакеты
-if ! dpkg -s wget unzip >/dev/null 2>&1; then
+if ! dpkg -s unzip >/dev/null 2>&1; then
   echo "Установка необходимых пакетов..."
-  apt install -y wget unzip
+  apt install -y unzip
 fi
 
 # Создаем папку /var/lib/marzban/xray-core
