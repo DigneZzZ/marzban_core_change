@@ -118,6 +118,11 @@ if ! grep -q "^${xray_executable_path}" "$marzban_env_file"; then
   # Если строка отсутствует, добавляем ее
   echo "${xray_executable_path}" >> "${marzban_env_file}"
 fi
+# Проверяем, существует ли уже строка /var/lib/marzban:/var/lib/marzban в файле docker-compose.yml
+if ! grep -q "- /var/lib/marzban:/var/lib/marzban" "$marzban_node_dir/docker-compose.yml"; then
+    # Если строка отсутствует, добавляем ее
+    sed -i '/volumes:/!b;n;/- \/var\/lib\/marzban:\/var\/lib\/marzban/!a\      - /var/lib/marzban:/var/lib/marzban' "$marzban_node_dir/docker-compose.yml"
+fi
 
 # Перезапускаем Marzban
 echo "Перезапуск Marzban..."
